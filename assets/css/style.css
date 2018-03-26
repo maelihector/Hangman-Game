@@ -19,6 +19,7 @@ h2 {
 
 .get-hint {
     background-color: rgba(102, 17, 17, 0.671);
+    color: #fff;
     padding: 20px;
     width: 30%;
 }
