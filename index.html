@@ -24,28 +24,32 @@
         <h4 class="display-5">Press any letter to get started!</h4>
 
         <p class="lead">Wins:
-          <span id="game">0</span>
+          <!-- Number of wins is kept track up via JavaScript and dumped under 'wins-counter' id. -->
+          <span id="wins-counter">0</span>
         </p>
 
         <p class="lead">Losses:
-          <span id="losses">0</span>
+          <!-- Number of losses is kept track up via JavaScript and dumped under 'loss-counter' id. -->
+          <span id="loss-counter">0</span>
         </p>
-
-        <p class="lead text-left" id="userguess">Letters already guessed:</p>
+        <!-- The letters that are guessed by the user are kept track up via JavaScript and dumped under 'user-guesses' id. -->
+        <p class="lead text-left" id="user-guesses">Letters already guessed:</p>
 
         <p class="lead">
-          <span id="asnwersGuessed"></span>
+          <!-- All of the right answers are kept track up via JavaScript and dumped under 'answers-guessed' id. -->
+          <span id="answers-guessed"></span>
         </p>
 
         <p class="lead text-left">You have
-          <span id="guessesLeft">15</span> guesses left!</p>
-
-        <p class="blanks" id="secretAnswer">_______</p>
+          <!-- The number of guesses that the user has left are kept track up via JavaScript and dumped under 'guesses-left' id. -->
+          <span id="guesses-left">15</span> guesses left!</p>
+          <!-- Using the id 'secret-answer' we replace each blank with the corresponding letter of the word as the user guesses them. -->
+        <p class="blanks" id="secret-answer">_______</p>
         <br>
+          <!-- If clicked, the user receives the corresponding hint. -->
+        <a href="#" class="get-hint">Click Me to get a hint!</a>
+        <p class="align-center" id="hint">
 
-        <a href="#" class="get-hint" >Click Me to get a hint!</a>
-          <p class="align-center" id="hint">
-    
         </p>
         <br>
 
