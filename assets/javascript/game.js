@@ -1,12 +1,12 @@
 // Hangman object to hold all logic and variables
-var cosmosHangman = {
+var cosmosGuessTheWordGame = {
 
-    //Object of all words used
-    wordsUsed: {
+    //Object of all words, plus their picture and hint that will be used in the game
+    words: {
         carlSagan: {
             word: "Carl Sagan",
             picture: "../images/CarlSagan.tiff",
-            hint: "He was the orginal host of the Cosmos documentary."
+            hint: "He was the host of the orginal Cosmos documentary."
         },
         neilTyson: {
             word: "Neil deGrasse Tyson",
@@ -31,7 +31,7 @@ var cosmosHangman = {
         titan: {
             word: "Titan",
             picture: "../images/titan.jpg",
-            hint: "Saturn's largest moon, which is said to have the most chance of containing life."
+            hint: "Saturn's largest moon."
         },
         asteroid: {
             word: "Asteroid",
@@ -46,12 +46,12 @@ var cosmosHangman = {
         proximaCentauri: {
             word: "Proxima Centauri",
             picture: "../images/proximaCentauri.jpg",
-            hint: "The name of the nearest star to our sun"
+            hint: "The name of the star nearest to our sun"
         },
         eventHorizon: {
             word: "Event Horizon",
             picture: "../images/eventHorizon.jpg",
             hint: "The boundary that separates a black hole from the rest of the universe."
-        },
+        }
     }
-};
+}
