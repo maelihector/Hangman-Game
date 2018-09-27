@@ -18,37 +18,31 @@
   <div class="container mt-4">
     <div class="jumbotron jumbotron-fluid" id="game">
       <div class="container text-center">
-        <h2 class="display-2">Cosmos</h2>
-        <h3 class="display-4">Guess The Word Game</h3>
+        <h1 class="display-2">Cosmos</h1>
+        <h2 class="display-4">Guess The Word Game</h2>
         <br>
-        <h4 class="display-5">Press any letter to get started!</h4>
+        <h3 class="display-5">Press any letter to get started!</h3>
 
-        <p class="lead">Wins:
+        <h4 class="lead">
           <!-- Number of wins is kept track up via JavaScript and dumped under 'wins-counter' id. -->
-          <span id="wins-counter">0</span>
-        </p>
+          Try to get a perfect 10 out of 10!
+          <br>
+          <br>
+          <span id="wins">0</span> wins out of <span id="totalWordsPlayed">0</span>
+        </h4>
 
-        <p class="lead">Losses:
-          <!-- Number of losses is kept track up via JavaScript and dumped under 'loss-counter' id. -->
-          <span id="loss-counter">0</span>
-        </p>
         <!-- The letters that are guessed by the user are kept track up via JavaScript and dumped under 'user-guesses' id. -->
-        <p class="lead text-left" id="user-guesses">Letters already guessed:</p>
+        <h5 class="lead text-left" id="lettersGuessed">Letters already guessed:</h5>
 
-        <p class="lead">
-          <!-- All of the right answers are kept track up via JavaScript and dumped under 'answers-guessed' id. -->
-          <span id="answers-guessed"></span>
-        </p>
-
-        <p class="lead text-left">You have
+        <h5 class="lead text-left">You have
           <!-- The number of guesses that the user has left are kept track up via JavaScript and dumped under 'guesses-left' id. -->
-          <span id="guesses-left">15</span> guesses left!</p>
-          <!-- Using the id 'secret-answer' we replace each blank with the corresponding letter of the word as the user guesses them. -->
-        <p class="blanks" id="secret-answer">_______</p>
+          <span id="numberOfIncorrectGuessesLeft">10</span> guesses left!</h5>
+        <!-- Using the id 'secret-answer' we replace each blank with the corresponding letter of the word as the user guesses them. -->
+        <p class="blanks" id="wordInPlay">_______</p>
         <br>
-          <!-- If clicked, the user receives the corresponding hint. -->
-        <a href="#" class="get-hint">Click Me to get a hint!</a>
         <p class="align-center" id="hint">
+          <!-- If clicked, the user receives the corresponding hint. -->
+          <a href="#" class="get-hint">Click Me to get a hint!</a>
 
         </p>
         <br>
@@ -57,6 +51,44 @@
     </div>
   </div>
 
+  <div id="lettersOnlyModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Oops</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Press letter keys only!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="noDuplicatesModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Oops</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>You already chose that letter, try a different one!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

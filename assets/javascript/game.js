@@ -1,4 +1,4 @@
-// Hangman object to hold all logic and variables
+// cosmosGuessTheWordGame object to hold all logic and variables
 var cosmosGuessTheWordGame = {
 
     //Object of all words, plus their picture and hint that will be used in the game
@@ -53,6 +53,41 @@ var cosmosGuessTheWordGame = {
             picture: "../images/eventHorizon.jpg",
             hint: "The boundary that separates a black hole from the rest of the universe."
         }
+    },
+
+    letterGuess: null,
+    lettersGuessedArray: [],
+
+    checkForDuplicateLetters: function (letter) {
+        // If letter is NOT in lettersGuessedArray,
+        if (this.lettersGuessedArray.indexOf(letter) === -1) {
+            // push the letter to lettersGuessedArray 
+            this.lettersGuessedArray.push(letter);
+            console.log(this.lettersGuessedArray); // Check
+        } else {
+            console.log("You already guessed " + letter); // Check
+            $('#noDuplicatesModal').modal('show');
+        }
+    }
+}
+
+// Log lettersGuessedArray for inital reference
+console.log(cosmosGuessTheWordGame.lettersGuessedArray);
+
+// Capture the players 'onkeyup' letter key
+document.onkeyup = function (event) {
+    keyPressed = event.key;
+    // Guesses can only be letters of the alphabet.
+    alphabetOnly = keyPressed.match(/[a-z]/);
+    console.log(alphabetOnly); // Check 
+    // If player presses something other than an alphabet key,
+    if (alphabetOnly === null || alphabetOnly.input.length > 1) {
+        console.log("Press only letters please!"); // Check
+        //  tell player to press a only letters via modal.
+        $('#lettersOnlyModal').modal('show');
+    } else {
+        // Pass the guessed letter into the checkForDuplicateLetters method of cosmosGuessTheWordGame.
+        cosmosGuessTheWordGame.checkForDuplicateLetters(alphabetOnly.input);
     }
 }
 
@@ -60,15 +95,15 @@ var cosmosGuessTheWordGame = {
 
 Hangman Pseudocode 
 
-The player clicks on letters on their keyboard they think will complete the word in play.
+The player clicks on letters of their keyboard they think will complete the word in play.
 
 What the page will show the player:
 1. '0 0f 0' 'wins' of 'total words played'. Tell player there are only 10 words to play (10 of 10 is perfect score).
 2. 10 as limit to 'number of incorrect guesses'. Will decrease -1 as player guesses a wrong letter.
 3. List of ALL 'Letters Guessed'. *Will not allow the player to guess the same letter twice to as not lose a guess on duplicates.
 4. Show the number of blanks as underscores( _ ) for every letter of the current word in play, 
-   and a single white space for spaces.
-5.Show the hint button, and have it blink lightly when the player has only 2 guesses left.
+   and a single white space for spaces in between words..
+5.Show a hint button, and have it blink lightly when the player has only 2 guesses left.
 
 For every letter clicked/guessed while word is in play:
     1. Check 'lettersGuessed' array for duplicates: 
@@ -79,13 +114,14 @@ For every letter clicked/guessed while word is in play:
                     1. Replace the appropriate _ with said letter.
                     2. Check 'wordInPlay' to see if word is complete:
                         I. If word is complete:
-                            1. Have modal show player won that game by guessing the word.
-                            2. +1 on 'wins'.
-                            3. +1 on 'totalWordsPlayed'.
+                            1. Have modal show player won that game by completing the word.
+                            2. Show photo of corresponding word.
+                            3. +1 on 'wins'.
+                            4. +1 on 'totalWordsPlayed'.
                                 a. If 'totalWordsPlayed' = 10:
                                     1. Show modal to tell player that all words have been played, show final score.
                                     2. Reset whole Game.
-                                b. If 'totalWordsPlayed' > 10:
+                                b. If 'totalWordsPlayed' < 10:
                                     1. Play next word.
                         II. If word not complete:
                             1. Wait for next guess.
@@ -102,7 +138,7 @@ For every letter clicked/guessed while word is in play:
                                 a. If 'totalWordsPlayed' = 10:
                                     1. Show modal to tell player that all words have been played, show final score.
                                     2. Reset whole Game.
-                                b. If 'totalWordsPlayed' > 10:
+                                b. If 'totalWordsPlayed' < 10:
                                     1. Play next word.
         B. If positive match to 'lettersGuessed' array:
             1. Have modal tell player 'You have already guessed _ , guess a new letter.'
