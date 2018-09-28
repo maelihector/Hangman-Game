@@ -1,25 +1,15 @@
 body {
-    background-image: url(../images/background.jpg);
-    background-repeat: no-repeat;
-    background-size: 100%;
+    text-align: center;
 }
 
-p {
-    font-weight: 200;
-}
-
-h2 {
-    font-family: 'Montserrat', sans-serif;
-}
 .jumbotron {
-    background-color: rgba(255, 255, 255, 0.349);
+    background-image: url("../images/background.jpg");
+    background-size: 100%;
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.774);
 }
 
 .get-hint {
     background-color: rgba(102, 17, 17, 0.671);
-    color: #fff;
     padding: 20px;
     width: 30%;
 }
@@ -27,4 +17,10 @@ h2 {
 .blanks {
     letter-spacing: 5px;
     font-size: 42px;
+    color: #fff;
+}
+
+.hint-image {
+    height: 40%;
+    width: 40%;
 }

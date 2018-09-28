@@ -4,43 +4,43 @@ var cosmosGuessTheWordGame = {
     //Object of all words, plus their picture and hint that will be used in the game
     words: {
         "carl sagan": {
-            picture: "../images/CarlSagan.tiff",
+            picture: "CarlSagan.jpg",
             hint: "He was the host of the orginal Cosmos documentary."
         },
         "neil degrasse tyson": {
-            picture: "../images/neil.jpg",
+            picture: "neil.jpg",
             hint: "He is the current host of the Cosmos documentary."
         },
         "jupiter": {
-            picture: "../images/jupiter.jpg",
+            picture: "jupiter.jpg",
             hint: "This planet has the most mass of all the planets in our Solar System."
         },
         "milky way galaxy": {
-            picture: "../images/milkyway.jpg",
+            picture: "milkyway.jpg",
             hint: "The name of the galaxy we live in."
         },
         "supernova": {
-            picture: "../images/supernova.jpg",
+            picture: "supernova.jpg",
             hint: "The violent death of a giant star"
         },
         "titan": {
-            picture: "../images/titan.jpg",
+            picture: "titan.jpg",
             hint: "Saturn's largest moon."
         },
         "asteroid": {
-            picture: "../images/asteroid.jpg",
+            picture: "asteroid.jpg",
             hint: "What is left of comets after their ice is evaporated by the sun."
         },
         "halleys comet": {
-            picture: "../images/halley.jpg",
+            picture: "halley.jpg",
             hint: "The comet that rotates around the sun every 76 years."
         },
         "proxima centauri": {
-            picture: "../images/proximaCentauri.jpg",
+            picture: "proximaCentauri.jpg",
             hint: "The name of the star nearest to our sun"
         },
         "event horizon": {
-            picture: "../images/eventHorizon.jpg",
+            picture: "eventHorizon.jpg",
             hint: "The boundary that separates a black hole from the rest of the universe."
         }
     },
@@ -67,6 +67,9 @@ var cosmosGuessTheWordGame = {
         this.currentWord = gameWords[Math.floor(Math.random() * gameWords.length)];
         // Slpit the string into an array and set the result as the value of 'this.wordItems'.
         this.wordItems = this.currentWord.split("");
+
+        // Update the image of the word.
+        document.querySelector("#image").innerHTML = "<img class='hint-image' src='./assets/images/" + this.words[this.currentWord].picture + "' alt='image of hidden word' />"
 
         this.buildWordBlanks();
     },
@@ -143,13 +146,13 @@ var cosmosGuessTheWordGame = {
             // reset wrongGuesses to 0
             wrongGuesses = 0;
             this.checkGameOver();
-        }    
+        }
     },
 
     // Method to check if player has played 5 games and whether they got a perfect score or not.
     checkGameOver: function () {
         totalGames = this.wins + this.losses;
-        
+
         // If player has played 5 games total, reset wins and losses to 0;
         if (this.wins === 5) {
             this.wins = 0;
@@ -213,7 +216,7 @@ Hangman Pseudocode
 The player clicks on letters of their keyboard they think will complete the word in play.
 
 What the page will show the player:
-1. '0 0f 0' 'wins' of 'total words played'. Tell player they will only play 5 games (10 of 10 is perfect score).
+1. '0 0f 0' 'wins' of 'total words played'. Tell player they will only play 5 games (5 of 5 is perfect score).
 2. 10 as limit to 'number of incorrect guesses'. Will decrease -1 as player guesses a wrong letter.
 3. List of ALL 'Letters Guessed'. *Will not allow the player to guess the same letter twice to as not lose a guess on duplicates.
 4. Show the number of blanks as underscores( _ ) for every letter of the current word in play, 
