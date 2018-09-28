@@ -3,61 +3,96 @@ var cosmosGuessTheWordGame = {
 
     //Object of all words, plus their picture and hint that will be used in the game
     words: {
-        carlSagan: {
-            word: "Carl Sagan",
+        "Carl Sagan": {
             picture: "../images/CarlSagan.tiff",
             hint: "He was the host of the orginal Cosmos documentary."
         },
-        neilTyson: {
-            word: "Neil deGrasse Tyson",
+        "Neil deGrasse Tyson": {
             picture: "../images/neil.jpg",
             hint: "He is the current host of the Cosmos documentary."
         },
-        jupiter: {
-            word: "Jupiter",
+        "Jupiter": {
             picture: "../images/jupiter.jpg",
             hint: "This planet has the most mass of all the planets in our Solar System."
         },
-        milkyWay: {
-            word: "Milky Way Galaxy",
+        "Milky Way Galaxy": {
             picture: "../images/milkyway.jpg",
             hint: "The name of the galaxy we live in."
         },
-        supernova: {
-            word: "Supernova",
+        "Supernova": {
             picture: "../images/supernova.jpg",
             hint: "The violent death of a giant star"
         },
-        titan: {
-            word: "Titan",
+        "Titan": {
             picture: "../images/titan.jpg",
             hint: "Saturn's largest moon."
         },
-        asteroid: {
-            word: "Asteroid",
+        "Asteroid": {
             picture: "../images/asteroid.jpg",
             hint: "What is left of comets after their ice is evaporated by the sun."
         },
-        halley: {
-            word: "Halley's Comet",
+        "Halleys Comet": {
             picture: "../images/halley.jpg",
             hint: "The comet that rotates around the sun every 76 years."
         },
-        proximaCentauri: {
-            word: "Proxima Centauri",
+        "Proxima Centauri": {
             picture: "../images/proximaCentauri.jpg",
             hint: "The name of the star nearest to our sun"
         },
-        eventHorizon: {
-            word: "Event Horizon",
+        "Event Horizon": {
             picture: "../images/eventHorizon.jpg",
             hint: "The boundary that separates a black hole from the rest of the universe."
         }
     },
 
+    currentWord: null,
+    wordItems: [],
+
     letterGuess: null,
     lettersGuessedArray: [],
 
+    newWord: function () {
+        // Start playing game words by picking a random word
+        // ** Be sure to add code that prevents the same word being played in a game set.
+        var gameWords = Object.keys(this.words);
+        console.log(gameWords); // check
+        this.currentWord = gameWords[Math.floor(Math.random() * gameWords.length)];
+
+        this.wordItems = this.currentWord.split("");
+
+        this.buildWordBlanks();
+    },
+
+    buildWordBlanks: function () {
+        console.log(this.wordItems); // check
+        var wordBlanks = "";
+
+        for (var i = 0; i < this.wordItems.length; i++) {
+            if (this.wordItems[i] === " "){
+                wordBlanks += "  ";
+            } else {
+                wordBlanks += "&nbsp;_&nbsp;";
+            }
+        }
+        document.querySelector("#currentWord").innerHTML = wordBlanks;
+    },
+
+    // This method makes sure that users only play letter keys
+    acceptAlphabetOnlyKeys: function (key) {
+        alphabetOnly = key.match(/[a-z]/);
+        console.log(alphabetOnly); // Check 
+        // If player presses something other than an alphabet key,
+        if (alphabetOnly === null || alphabetOnly.input.length > 1) {
+            console.log("Press only letters please!"); // Check
+            //  tell player to press a only letters via modal.
+            $('#lettersOnlyModal').modal('show');
+        } else {
+            // If a letter is pressed, pass the guessed letter into the checkForDuplicateLetters method.
+            this.checkForDuplicateLetters(alphabetOnly.input);
+        }
+    },
+
+    // This method checks if the played letter is not already in the lettersGuessedArray to keep the player from losing a guess.
     checkForDuplicateLetters: function (letter) {
         // If letter is NOT in lettersGuessedArray,
         if (this.lettersGuessedArray.indexOf(letter) === -1) {
@@ -70,25 +105,16 @@ var cosmosGuessTheWordGame = {
         }
     }
 }
+cosmosGuessTheWordGame.newWord();
 
 // Log lettersGuessedArray for inital reference
-console.log(cosmosGuessTheWordGame.lettersGuessedArray);
+console.log(cosmosGuessTheWordGame.lettersGuessedArray); // check
 
 // Capture the players 'onkeyup' letter key
 document.onkeyup = function (event) {
     keyPressed = event.key;
-    // Guesses can only be letters of the alphabet.
-    alphabetOnly = keyPressed.match(/[a-z]/);
-    console.log(alphabetOnly); // Check 
-    // If player presses something other than an alphabet key,
-    if (alphabetOnly === null || alphabetOnly.input.length > 1) {
-        console.log("Press only letters please!"); // Check
-        //  tell player to press a only letters via modal.
-        $('#lettersOnlyModal').modal('show');
-    } else {
-        // Pass the guessed letter into the checkForDuplicateLetters method of cosmosGuessTheWordGame.
-        cosmosGuessTheWordGame.checkForDuplicateLetters(alphabetOnly.input);
-    }
+    // Pass keyPressed value to our acceptAlphabetOnlyKeys method.
+    cosmosGuessTheWordGame.acceptAlphabetOnlyKeys(keyPressed);
 }
 
 /* 
