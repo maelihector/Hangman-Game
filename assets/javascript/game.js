@@ -47,51 +47,51 @@ var cosmosGuessTheWordGame = {
 
     currentWord: null,
     wordItems: [],
-
-    letterGuess: null,
     lettersGuessedArray: [],
+    wins: 0,
+    losses: 0,
 
+    // Method to play a new word.
     newWord: function () {
-        // Start playing game words by picking a random word
-        // ** Be sure to add code that prevents the same word being played in a game set.
-
-        // Reset 
+        // Update player's current scores.
+        document.querySelector("#wins").innerHTML = this.wins;
+        document.querySelector("#totalWordsPlayed").innerHTML = this.wins + this.losses;
+        // Reset for a new word.
         this.currentWord = null,
             this.wordItems = [],
-            this.letterGuess = null,
             this.lettersGuessedArray = [],
 
+            // Set value of 'gameWords' variable to 'words' in our 'cosmosGuessTheWordGame' object.
             gameWords = Object.keys(this.words);
-        console.log(gameWords); // check
+        // Pick a random word to play and set the result as the value of 'this.currentWord'.
         this.currentWord = gameWords[Math.floor(Math.random() * gameWords.length)];
-
+        // Slpit the string into an array and set the result as the value of 'this.wordItems'.
         this.wordItems = this.currentWord.split("");
 
         this.buildWordBlanks();
     },
 
-    // Method to build the blanks (underscores) on the DOM of the word at play. 
+    // Method to build the current word at play on the DOM. 
     buildWordBlanks: function () {
-        console.log(this.wordItems); // check
-        // Start with an empty string since outcome will be a string.
+        // Start with an empty string since outcome will be a string (of letters, whitespaces, and underscores).
         var wordBlanks = "";
-        // Loop through the current word items.
+        // Loop through 'this.wordItems' array.
         for (var i = 0; i < this.wordItems.length; i++) {
-            // If there is a whitespace in the word/name, make sure to add a space.
+            // If there is a whitespace, make sure to add a space.
             if (this.wordItems[i] === " ") {
                 wordBlanks += "  ";
-                // Check against 'lettersGuessedArray' for matches to fill in already correctly guessed letters.
+                // Check 'this.lettersGuessedArray' against 'this.wordItems' for matches to fill correctly guessed letters.
             } else if (this.lettersGuessedArray.indexOf(this.wordItems[i]) !== -1) {
                 wordBlanks += this.wordItems[i];
             } else {
-                // Put underscores on every unguessed letter of the current word.
+                // Put underscores for every item left of 'this.wordItems'.
                 wordBlanks += "&nbsp;_&nbsp;";
             }
         }
 
-        // Select id="currentWord" from document and 'innerHTML' wordBlanks.
+        // Access the DOM to 'draw' our wordBlanks.
         document.querySelector("#currentWord").innerHTML = wordBlanks;
-        // Select id="lettersGuessed" from document and 'innerHTML'  the 'lettersGuessedArray'.
+        // Access the DOM to show the player their 'lettersGuessedArray'.
         document.querySelector("#lettersGuessed").innerHTML = this.lettersGuessedArray;
 
         this.checkTotalcorrectGuesses();
@@ -101,61 +101,78 @@ var cosmosGuessTheWordGame = {
     // Method that checks if player has guessed the entire word.
     // Pass the method two arguments, one being the letters of the word in play, the other being the player's guesses.
     checkTotalcorrectGuesses: function (uniqueLettersOfTheWord, totalGuessedLetters) {
-        console.log(this.wordItems); // check
-        console.log(this.lettersGuessedArray); // check
-
-        // Remove the whitespace from the word in play
+        // Remove whitespace from the word in play
         lettersOfTheWord = this.wordItems.filter(function (str) {
             return /\S/.test(str);
         });
-
-        console.log(lettersOfTheWord); // check
-
-        // Remove the repeating letters in the word in play and show only once and place new array in var 'uniqueletters'.
+        // Have repeating letters show only once and place new array in var 'uniqueletterOfTheWord'.
         var uniqueLettersOfTheWord = lettersOfTheWord.filter(function (item, index) {
             return lettersOfTheWord.indexOf(item) >= index;
         });
-        console.log(uniqueLettersOfTheWord); // check
-
+        // Give local var 'totalGuessedLetters' the value of global var 'this.lettersGuessedArray'.  
         totalGuessedLetters = this.lettersGuessedArray;
 
-        // Start with an empty array
+        // Start with an empty array for 'correctGuesses'
         var correctGuesses = [];
 
-        // Compare the two arrays
-        totalGuessedLetters.forEach((guessedletterItem) => uniqueLettersOfTheWord.forEach((wordItem) => {
-            // If a guessed letter is equal to a letter in the word in play AND if it's not in there already (to prevent ducplicates if a word has more than one of the same letter)
-            if (guessedletterItem === wordItem && correctGuesses.indexOf(guessedletterItem) === -1) {
-                // Add to correctGuesses array
-                correctGuesses.push(guessedletterItem)
+        // Compare the 'totalGuessedLetters' and  'uniqueletterOfTheWord' arrays
+        totalGuessedLetters.forEach((guessedLetter) => uniqueLettersOfTheWord.forEach((uniqueLetter) => {
+            // If a guessed letter is equal to a unique letter in the word AND if it's not in there already (to prevent ducplicates if a word has more than one of the same letter),
+            if (guessedLetter === uniqueLetter && correctGuesses.indexOf(guessedLetter) === -1) {
+                // push to correctGuesses array
+                correctGuesses.push(guessedLetter)
                 return correctGuesses;
             }
         }));
 
+        // Update the DOM with  wrong guesses amount.
         wrongGuesses = this.lettersGuessedArray.length - correctGuesses.length;
         document.querySelector("#numberOfIncorrectGuesses").innerHTML = wrongGuesses;
 
-        // Reset gusses if word is complete or if limit of wrong guesses ir reached.
+        // Check if player has reached their limit to wrong guesses.
         if (wrongGuesses === 10) {
-            console.log("Sorry, you had too many wrong guesses!");
+            // increase losses by +1
+            this.losses++;
+            // reset wrongGuesses to 0
             wrongGuesses = 0;
-            this.newWord();
+            this.checkGameOver();
+            // Or if player has completed the word.
         } else if (correctGuesses.length === uniqueLettersOfTheWord.length) {
+            // increase wins by +1
+            this.wins++;
+            // reset wrongGuesses to 0
             wrongGuesses = 0;
-            this.newWord();
-        }
-
-        console.log(correctGuesses); // check        
+            this.checkGameOver();
+        }    
     },
 
+    // Method to check if player has played 5 games and whether they got a perfect score or not.
+    checkGameOver: function () {
+        totalGames = this.wins + this.losses;
+        
+        // If player has played 5 games total, reset wins and losses to 0;
+        if (this.wins === 5) {
+            this.wins = 0;
+            this.losses = 0;
+            // Congratulate if player won 5 of 5.
+            $('#perfectScoreModal').modal('show');
+            this.newWord();
+        } else if (totalGames === 5) {
+            this.wins = 0;
+            this.losses = 0;
+            // Tell player they did not get 5 of 5.
+            $('#fiveWordsPlayedModal').modal('show');
+            this.newWord();
+        } else {
+            this.newWord();
+        }
+    },
 
-    // This method makes sure that users only play letter keys
+    // This method makes sure that player's only play letter keys
     acceptOnlyAlphabetkeys: function (key) {
         alphabetOnly = key.match(/[a-z]/);
-        console.log(alphabetOnly); // Check 
         // If player presses something other than an alphabet key,
         if (alphabetOnly === null || alphabetOnly.input.length > 1) {
-            console.log("Press only letters please!"); // Check
             //  tell player to press a only letters via modal.
             $('#lettersOnlyModal').modal('show');
         } else {
@@ -170,18 +187,17 @@ var cosmosGuessTheWordGame = {
         if (this.lettersGuessedArray.indexOf(letter) === -1) {
             // push the letter to lettersGuessedArray 
             this.lettersGuessedArray.push(letter);
-            console.log(this.lettersGuessedArray); // Check
             this.buildWordBlanks();
         } else {
-            console.log("You already guessed " + letter); // Check
+            // Tell player that letter has already been played.
             $('#noDuplicatesModal').modal('show');
         }
     }
 }
+
+// Start game at page load.
 cosmosGuessTheWordGame.newWord();
 
-// Log lettersGuessedArray for inital reference
-console.log(cosmosGuessTheWordGame.lettersGuessedArray); // check
 
 // Capture the players 'onkeyup' letter key
 document.onkeyup = function (event) {
@@ -197,7 +213,7 @@ Hangman Pseudocode
 The player clicks on letters of their keyboard they think will complete the word in play.
 
 What the page will show the player:
-1. '0 0f 0' 'wins' of 'total words played'. Tell player there are only 10 words to play (10 of 10 is perfect score).
+1. '0 0f 0' 'wins' of 'total words played'. Tell player they will only play 5 games (10 of 10 is perfect score).
 2. 10 as limit to 'number of incorrect guesses'. Will decrease -1 as player guesses a wrong letter.
 3. List of ALL 'Letters Guessed'. *Will not allow the player to guess the same letter twice to as not lose a guess on duplicates.
 4. Show the number of blanks as underscores( _ ) for every letter of the current word in play, 

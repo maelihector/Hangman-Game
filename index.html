@@ -25,6 +25,7 @@
 
         <h4 class="lead">
           <!-- Number of wins is kept track up via JavaScript and dumped under 'wins-counter' id. -->
+
           Try to get a perfect 5 out of 5!
           <br>
           <br>
@@ -89,6 +90,46 @@
       </div>
     </div>
   </div>
+
+  <div id="perfectScoreModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Perfect 5 out of 5</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Congratulations!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Yay! Again!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="fiveWordsPlayedModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">You've played 5 Games.</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Sorry you didn't get a perfect 5 of 5!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Try again!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
