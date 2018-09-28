@@ -3,43 +3,43 @@ var cosmosGuessTheWordGame = {
 
     //Object of all words, plus their picture and hint that will be used in the game
     words: {
-        "Carl Sagan": {
+        "carl sagan": {
             picture: "../images/CarlSagan.tiff",
             hint: "He was the host of the orginal Cosmos documentary."
         },
-        "Neil deGrasse Tyson": {
+        "neil degrasse tyson": {
             picture: "../images/neil.jpg",
             hint: "He is the current host of the Cosmos documentary."
         },
-        "Jupiter": {
+        "jupiter": {
             picture: "../images/jupiter.jpg",
             hint: "This planet has the most mass of all the planets in our Solar System."
         },
-        "Milky Way Galaxy": {
+        "milky way galaxy": {
             picture: "../images/milkyway.jpg",
             hint: "The name of the galaxy we live in."
         },
-        "Supernova": {
+        "supernova": {
             picture: "../images/supernova.jpg",
             hint: "The violent death of a giant star"
         },
-        "Titan": {
+        "titan": {
             picture: "../images/titan.jpg",
             hint: "Saturn's largest moon."
         },
-        "Asteroid": {
+        "asteroid": {
             picture: "../images/asteroid.jpg",
             hint: "What is left of comets after their ice is evaporated by the sun."
         },
-        "Halleys Comet": {
+        "halleys comet": {
             picture: "../images/halley.jpg",
             hint: "The comet that rotates around the sun every 76 years."
         },
-        "Proxima Centauri": {
+        "proxima centauri": {
             picture: "../images/proximaCentauri.jpg",
             hint: "The name of the star nearest to our sun"
         },
-        "Event Horizon": {
+        "event horizon": {
             picture: "../images/eventHorizon.jpg",
             hint: "The boundary that separates a black hole from the rest of the universe."
         }
@@ -66,11 +66,14 @@ var cosmosGuessTheWordGame = {
     buildWordBlanks: function () {
         console.log(this.wordItems); // check
         var wordBlanks = "";
-
         for (var i = 0; i < this.wordItems.length; i++) {
-            if (this.wordItems[i] === " "){
+            // If there is a whitespace in the word/name, make sure to add a space to the DOM.
+            if (this.wordItems[i] === " ") {
                 wordBlanks += "  ";
+            } else if (this.lettersGuessedArray.indexOf(this.wordItems[i]) !== -1) {
+                wordBlanks += this.wordItems[i];
             } else {
+                // Put underscores for evry unguessed letter of the current word.
                 wordBlanks += "&nbsp;_&nbsp;";
             }
         }
@@ -99,6 +102,7 @@ var cosmosGuessTheWordGame = {
             // push the letter to lettersGuessedArray 
             this.lettersGuessedArray.push(letter);
             console.log(this.lettersGuessedArray); // Check
+            this.buildWordBlanks();
         } else {
             console.log("You already guessed " + letter); // Check
             $('#noDuplicatesModal').modal('show');
