@@ -25,18 +25,18 @@
 
         <h4 class="lead">
           <!-- Number of wins is kept track up via JavaScript and dumped under 'wins-counter' id. -->
-          Try to get a perfect 10 out of 10!
+          Try to get a perfect 5 out of 5!
           <br>
           <br>
           <span id="wins">0</span> wins out of <span id="totalWordsPlayed">0</span>
         </h4>
 
-        <!-- The letters that are guessed by the user are kept track up via JavaScript and dumped under 'user-guesses' id. -->
-        <h5 class="lead text-left" id="lettersGuessed">Letters already guessed:</h5>
+        <!-- The letters that are guessed by the user are kept track up via JavaScript and dumped under 'lettersGuessed' id. -->
+        <h5 class="lead text-left">Letters already guessed:</h5><span class="lead text-left" id="lettersGuessed"></span>
 
-        <h5 class="lead text-left">You have
+        <h5 class="lead text-left">You have used 
           <!-- The number of guesses that the user has left are kept track up via JavaScript and dumped under 'guesses-left' id. -->
-          <span id="numberOfIncorrectGuessesLeft">10</span> guesses left!</h5>
+          <span id="numberOfIncorrectGuesses">0</span> of your 10 wrong guesses allowed!</h5>
         <!-- Using the id 'secret-answer' we replace each blank with the corresponding letter of the word as the user guesses them. -->
         <p class="blanks" id="currentWord"></p>
         <br>
