@@ -9,9 +9,11 @@ body {
 }
 
 .get-hint {
-    background-color: rgba(102, 17, 17, 0.671);
+    background-color: rgba(125, 21, 21, 0.93);
     padding: 20px;
     width: 30%;
+    color: #e2d9d9;
+    border: 2px solid #4a0607;
 }
 
 .blanks {
@@ -23,4 +25,19 @@ body {
 .hint-image {
     height: 40%;
     width: 40%;
+}
+
+.background {
+    background-color: #2f1d9069;
+    padding: 1%;
+    margin-bottom: 10px;
+}
+
+.letters-guessed {
+    letter-spacing: 5px;
+    font-size: 3vw;
+}
+
+.incorrect-guesses {
+    color: red;
 }
