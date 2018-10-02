@@ -42,6 +42,14 @@ var cosmosGuessTheWordGame = {
         "event horizon": {
             picture: "eventHorizon.jpg",
             hint: "The boundary that separates a black hole from the rest of the universe."
+        },
+        "tardigrade": {
+            picture: "tardigrade.jpg",
+            hint: "A species on earth that has lived over 500 million years."
+        },
+        "tiktaalik": {
+            picture: "tiktaalik.jpg",
+            hint: "One of the first animals to venture onto land from the sea."
         }
     },
 
@@ -106,12 +114,12 @@ var cosmosGuessTheWordGame = {
 
     },
 
+    // Method that displays text hint when player click on the 'hint button'
     getHint: function () {
-     
+        // Access the target aread of the DOM
         var hintDiv = document.querySelector("#hint");
-
+        // Display text in target area.
         hintDiv.textContent = this.currentHint;
-
     },
 
     // Method that checks if player has guessed the entire word.
@@ -223,12 +231,10 @@ document.onkeyup = function (event) {
 }
 
 // Listen for hint button clicks
-   var btn = document.getElementById("getHint");
-   btn.onclick = function(event) {
+var btn = document.getElementById("getHint");
+btn.onclick = function (event) {
     cosmosGuessTheWordGame.getHint(event);
-   };
- 
-
+};
 
 /* 
 
