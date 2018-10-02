@@ -21,7 +21,7 @@
     <h1 class="display-2">Cosmos</h1>
     <h2 class="display-4">Guess the Hidden Name</h2>
     <h3 class="display-5">Press any letter to get started!</h3>
-    <h4 class="lead">Try to get a perfect 5 out of 5!</h4>
+    <h4 class="lead">Try to get a perfect 5 out of 5 before the game resets!</h4>
 
     <h5 class="lead text-left">
       <!-- Number of wins is kept track up via JavaScript and dumped under 'wins-counter' id. -->
@@ -38,11 +38,11 @@
 
     <!-- Using the id 'currentWord' we replace each blank with the corresponding letter of the word as the user guesses them. -->
     <p class="blanks" id="currentWord"></p>
-    <p class="align-center" id="hint">
+    <div class="align-center" id="hint">
       <!-- If clicked, the user receives the corresponding hint. -->
-      <a href="#" class="get-hint">Click Me to get a hint!</a>
-
-    </p>
+      
+    </div>
+    <button id="getHint" class="get-hint">Click Me to get a hint!</button>
   </div>
 
 

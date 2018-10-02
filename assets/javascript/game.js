@@ -50,16 +50,20 @@ var cosmosGuessTheWordGame = {
     lettersGuessedArray: [],
     wins: 0,
     losses: 0,
+    currentHint: null,
 
     // Method to play a new word.
     newWord: function () {
         // Update player's current scores.
         document.querySelector("#wins").innerHTML = this.wins;
         document.querySelector("#totalWordsPlayed").innerHTML = this.wins + this.losses;
+        // Hide last hint if need be.
+        document.querySelector("#hint").textContent = "";
         // Reset for a new word.
         this.currentWord = null,
             this.wordItems = [],
             this.lettersGuessedArray = [],
+            this.currentHint = null,
 
             // Set value of 'gameWords' variable to 'words' in our 'cosmosGuessTheWordGame' object.
             gameWords = Object.keys(this.words);
@@ -67,7 +71,8 @@ var cosmosGuessTheWordGame = {
         this.currentWord = gameWords[Math.floor(Math.random() * gameWords.length)];
         // Slpit the string into an array and set the result as the value of 'this.wordItems'.
         this.wordItems = this.currentWord.split("");
-
+        // Give the global var the current hint.
+        this.currentHint = this.words[this.currentWord].hint;
         // Update the image of the word.
         document.querySelector("#image").innerHTML = "<img class='hint-image' src='./assets/images/" + this.words[this.currentWord].picture + "' alt='image of hidden word' />"
 
@@ -98,6 +103,14 @@ var cosmosGuessTheWordGame = {
         document.querySelector("#lettersGuessed").innerHTML = this.lettersGuessedArray;
 
         this.checkTotalcorrectGuesses();
+
+    },
+
+    getHint: function () {
+     
+        var hintDiv = document.querySelector("#hint");
+
+        hintDiv.textContent = this.currentHint;
 
     },
 
@@ -208,6 +221,14 @@ document.onkeyup = function (event) {
     // Pass keyPressed value to our acceptOnlyAlphabetkeys method.
     cosmosGuessTheWordGame.acceptOnlyAlphabetkeys(keyPressed);
 }
+
+// Listen for hint button clicks
+   var btn = document.getElementById("getHint");
+   btn.onclick = function(event) {
+    cosmosGuessTheWordGame.getHint(event);
+   };
+ 
+
 
 /* 
 
