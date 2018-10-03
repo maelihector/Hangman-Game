@@ -89,7 +89,7 @@ var cosmosGuessTheWordGame = {
 
     // Method to build the current word at play on the DOM. 
     buildWordBlanks: function () {
-        // Start with an empty string since outcome will be a string (of letters, whitespaces, and underscores).
+        // Start with an empty string, since outcome will be a string (of letters, whitespaces, and underscores).
         var wordBlanks = "";
         // Loop through 'this.wordItems' array.
         for (var i = 0; i < this.wordItems.length; i++) {
@@ -104,36 +104,26 @@ var cosmosGuessTheWordGame = {
                 wordBlanks += "&nbsp;_&nbsp;";
             }
         }
-
         // Access the DOM to 'draw' our wordBlanks.
         document.querySelector("#currentWord").innerHTML = wordBlanks;
         // Access the DOM to show the player their 'lettersGuessedArray'.
         document.querySelector("#lettersGuessed").innerHTML = this.lettersGuessedArray;
-
-        this.checkTotalcorrectGuesses();
-
-    },
-
-    // Method that displays text hint when player click on the 'hint button'
-    getHint: function () {
-        // Access the target aread of the DOM
-        var hintDiv = document.querySelector("#hint");
-        // Display text in target area.
-        hintDiv.textContent = this.currentHint;
+        // Call 'checkTotalCorrectGuesses' method
+        this.checkTotalCorrectGuesses();
     },
 
     // Method that checks if player has guessed the entire word.
     // Pass the method two arguments, one being the letters of the word in play, the other being the player's guesses.
-    checkTotalcorrectGuesses: function (uniqueLettersOfTheWord, totalGuessedLetters) {
-        // Remove whitespace from the word in play
+    checkTotalCorrectGuesses: function (uniqueLettersOfTheWord, totalGuessedLetters) {
+        // First filter/remove whitespace from the word in play
         lettersOfTheWord = this.wordItems.filter(function (str) {
             return /\S/.test(str);
         });
-        // Have repeating letters show only once and place new array in var 'uniqueletterOfTheWord'.
+        // Then filter repeating letters of the word and place new array in var 'uniqueletterOfTheWord'.
         var uniqueLettersOfTheWord = lettersOfTheWord.filter(function (item, index) {
             return lettersOfTheWord.indexOf(item) >= index;
         });
-        // Give local var 'totalGuessedLetters' the value of global var 'this.lettersGuessedArray'.  
+        // Grab the value of global var 'this.lettersGuessedArray'.  
         totalGuessedLetters = this.lettersGuessedArray;
 
         // Start with an empty array for 'correctGuesses'
@@ -179,13 +169,17 @@ var cosmosGuessTheWordGame = {
             this.wins = 0;
             this.losses = 0;
             // Congratulate if player won 5 of 5.
-            $('#perfectScoreModal').modal('show');
+            setTimeout(function () {
+                $('#perfectScoreModal').modal('show');
+            }, 1000);
             this.newWord();
         } else if (totalGames === 5) {
             this.wins = 0;
             this.losses = 0;
             // Tell player they did not get 5 of 5.
-            $('#fiveWordsPlayedModal').modal('show');
+            setTimeout(function () {
+                $('#fiveWordsPlayedModal').modal('show');
+            }, 1000);
             this.newWord();
         } else {
             this.newWord();
@@ -207,16 +201,26 @@ var cosmosGuessTheWordGame = {
 
     // This method checks if the played letter is not already in the lettersGuessedArray to keep the player from losing a guess.
     checkForDuplicateLetters: function (letter) {
-        // If letter is NOT in lettersGuessedArray,
+        // If letter is NOT equal to a letter in our lettersGuessedArray,
         if (this.lettersGuessedArray.indexOf(letter) === -1) {
             // push the letter to lettersGuessedArray 
             this.lettersGuessedArray.push(letter);
+            // call 'buildWordBlanks' metthod.
             this.buildWordBlanks();
         } else {
             // Tell player that letter has already been played.
             $('#noDuplicatesModal').modal('show');
         }
-    }
+    },
+
+    // Method that displays text hint when player click on the 'hint button'
+    getHint: function () {
+        // Access the target aread of the DOM
+        var hintDiv = document.querySelector("#hint");
+        // Display text in target area.
+        hintDiv.textContent = this.currentHint;
+    },
+
 }
 
 // Start game at page load.
