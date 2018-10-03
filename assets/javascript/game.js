@@ -66,7 +66,7 @@ var cosmosGuessTheWordGame = {
         document.querySelector("#wins").innerHTML = this.wins;
         document.querySelector("#totalWordsPlayed").innerHTML = this.wins + this.losses;
         // Hide last hint if need be.
-        document.querySelector("#hint").textContent = "";
+        document.querySelector("#hint").innerHTML = "";
         // Reset for a new word.
         this.currentWord = null,
             this.wordItems = [],
@@ -218,7 +218,7 @@ var cosmosGuessTheWordGame = {
         // Access the target aread of the DOM
         var hintDiv = document.querySelector("#hint");
         // Display text in target area.
-        hintDiv.textContent = this.currentHint;
+        hintDiv.innerHTML = this.currentHint;
     },
 
 }
