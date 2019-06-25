@@ -7,49 +7,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i" rel="stylesheet">
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
   <title>Guess the Word!</title>
 </head>
 
 <body>
-
+  
   <div class="jumbotron" id="game">
-
+    
     <h1 class="display-2">Cosmos TV Show</h1>
     <h2 class="display-4">Guessing Game</h2>
     <h3 class="display-5">Press any letter to get started!</h3>
     <h4 class="lead">Try to get a perfect 5 out of 5 before the game resets!</h4>
+    
+      <div class="row">
 
-    <div class="background">
-      <h5 class="lead text-left">
-        <!-- Number of wins is kept track up via JavaScript and dumped under 'wins-counter' id. -->
-        <span id="wins">0</span> wins out of <span id="totalWordsPlayed">0</span>
-      </h5>
-      <!-- The letters that are guessed by the user are kept track up via JavaScript and dumped under 'lettersGuessed' id. -->
-      <h5 class="lead text-left">Letters already guessed:</h5><span class="lead text-left letters-guessed" id="lettersGuessed"></span>
-      <h5 class="lead text-left">
-        You have used
-        <!-- The number of guesses that the user has left are kept track up via JavaScript and dumped under 'guesses-left' id. -->
-        <span class="incorrect-guesses" id="numberOfIncorrectGuesses">0</span>
-        of your 10 wrong guesses allowed!</h5>
+        <div class="background col-md-3 col-sm-12">
+          <h5 class="lead text-center">
+            <!-- Number of wins is kept track up via JavaScript and dumped under 'wins-counter' id. -->
+            <span id="wins">0</span> wins out of <span id="totalWordsPlayed">0</span>
+          </h5>
+          <!-- The letters that are guessed by the user are kept track up via JavaScript and dumped under 'lettersGuessed' id. -->
+          <h5 class="lead text-center">Letters already guessed:</h5>
+          <span class="lead text-center letters-guessed" id="lettersGuessed"></span>
+          <h5 class="lead text-center">
+            You have used
+            <!-- The number of guesses that the user has left are kept track up via JavaScript and dumped under 'guesses-left' id. -->
+            <span class="incorrect-guesses" id="numberOfIncorrectGuesses">0</span>
+            of your 10 wrong guesses allowed!
+          </h5>
+        </div>
+
+        <div class="background col-md-9 col-sm-12">
+          <h4 class="lead">What or Who is in the image below?</h4>
+          <div id="image"></div>
+          <!-- Using the id 'currentWord' we replace each blank with the corresponding letter of the word as the user guesses them. -->
+          <p class="blanks background" id="currentWord"></p>
+          <div class="align-center" id="hint">
+            <!-- If clicked, the user receives the corresponding hint. -->
+          </div>
+          <button id="getHint" class="get-hint">Click Me to get a hint!</button>
+        </div>
+
+      </div>
+
     </div>
-    <div class="background">
-      <h4 class="lead">What or Who is in the image below?</h4>
-      <div id="image"></div>
-    </div>
-    <!-- Using the id 'currentWord' we replace each blank with the corresponding letter of the word as the user guesses them. -->
-    <p class="blanks background" id="currentWord"></p>
-    <div class="align-center" id="hint">
-      <!-- If clicked, the user receives the corresponding hint. -->
 
-    </div>
-    <button id="getHint" class="get-hint">Click Me to get a hint!</button>
-  </div>
-
-
+<!-- Game Modals -->
   <div id="lettersOnlyModal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -68,7 +75,6 @@
       </div>
     </div>
   </div>
-
 
   <div id="noDuplicatesModal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -130,12 +136,15 @@
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+  </script>
   <script src="./assets/javascript/game.js"></script>
 </body>
 
