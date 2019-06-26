@@ -221,7 +221,7 @@ var cosmosGuessTheWordGame = {
 
   // This method checks if the played letter is not already in the lettersGuessedArray to keep the player from losing a guess.
   checkForDuplicateLetters: function (letter) {
-    // If letter is NOT equal to a letter in our lettersGuessedArray,
+    // If letter is not (-1) in our lettersGuessedArray,
     if (this.lettersGuessedArray.indexOf(letter) === -1) {
       // push the letter to lettersGuessedArray 
       this.lettersGuessedArray.push(letter);
@@ -229,6 +229,7 @@ var cosmosGuessTheWordGame = {
       this.buildWordBlanks();
     } else {
       // Tell player that letter has already been played.
+      $('#duplicate-letter').text(letter);
       $('#noDuplicatesModal').modal('show');
     }
   },

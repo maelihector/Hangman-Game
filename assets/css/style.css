@@ -61,3 +61,9 @@ body {
   background: #00000066;
   margin: 5px;
 }
+
+#duplicate-letter {
+  font-size: 20px;
+  color: red;
+
+}
