@@ -116,8 +116,6 @@ var cosmosGuessTheWordGame = {
     }
     // Access the DOM to 'draw' our wordBlanks.
     document.querySelector("#currentWord").innerHTML = wordBlanks;
-    // Access the DOM to show the player their 'lettersGuessedArray'.
-    document.querySelector("#lettersGuessed").innerHTML = this.lettersGuessedArray;
     // Call 'checkTotalCorrectGuesses' method
     this.checkTotalCorrectGuesses();
   },
@@ -153,6 +151,12 @@ var cosmosGuessTheWordGame = {
     wrongGuesses = this.lettersGuessedArray.length - correctGuesses.length;
     document.querySelector("#numberOfIncorrectGuesses").innerHTML = wrongGuesses;
 
+    // Call diff() function to get incorrect letters guessed.
+    var incorrectGuesses = this.diff(this.lettersGuessedArray, correctGuesses);
+    // Update the DOM to show the player right and wrong guessed letters.
+    document.querySelector("#wrongLettersGuessed").innerHTML = incorrectGuesses;
+    document.querySelector("#rightLettersGuessed").innerHTML = correctGuesses;
+
     // Check if player has reached their limit to wrong guesses.
     if (wrongGuesses === 10) {
       // increase losses by +1
@@ -168,6 +172,12 @@ var cosmosGuessTheWordGame = {
       wrongGuesses = 0;
       this.checkGameOver();
     }
+  },
+
+  // Method that returns incorrectly guessed letters by comparing correct guesses array and total guesses array
+  diff: function(totalGuessesArray, correctGuessesArray) {
+    // filter total guesses array and return only those that do not appear in correct guesses array.
+    return totalGuessesArray.filter(function(i) {return correctGuessesArray.indexOf(i) < 0;});
   },
 
   // Method to check if player has played 5 games and whether they got a perfect score or not.
