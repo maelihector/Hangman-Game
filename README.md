@@ -1,24 +1,47 @@
-# Cosmos TV Show Themed Guessing Game
+# Guess The Word
 
-## What is this?
-A guessing game similar to Hangman (minus the drawing depicting a hanging man), where a player guesses a Cosmos themed word letter by letter until they either run out of guesses or complete the word.
-## How does it work?
-- Uses the Global Event Handlers `onkeyup`  to capture the player's letter guess as they release said key on their keyboard, and `onclick` property to signal mouse events.
-	
-- Uses the DOM method `querySelector()` to find HTML elements, and  `innerHTML` to get and/or set the HTML within the specified element to keep the player updated with the game's progression.
+## A Cosmos Themed Word Guessing Game
 
-- Uses OOP, and so has all of the game code (except for key and mouse events) is organized in one object with several methods, which are called with the key and/or mouse events.
+### What is this?
 
-## Technologies Used
+Guess The Word is a Hangman-like computer game where a player tries to guess a word letter by letter until they complete the word. 
+
+The game plays a total of 5 words for the player. The player is allowed 10 wrong letter guesses per word before the player looses their chance of completing that word. The game keeps track of completed words and loses and shows these to the player throughout the game. 
+
+The game is over when the player has played 5 words. 
+
+### How does it work?
+
+Guess The Word uses Object Oriented Programming, and has all of its code (except for events) organized inside an object with several methods that power the game. 
+
+The game methods are called with Global Event Handlers;  `onkeyup` to capture the player's letter guess, and `onclick` to signal mouse events.
+
+Using the DOM method `querySelector()` to find HTML elements, and `innerHTML` to get and/or set the HTML within the specified element, the game is able to keep the player updated with the game's progression. 
+
+### What does it do?
+
+Upon loading, the game chooses a new word at random to play, and builds a `string` of underscores that represent each letter of the word. The `string` is placed on the DOM for the user to see.
+
+When the `onkeyup` event handler captures an event the game  checks if the event refers to an alphabet letter key, and if alphabet key is a *new* guess and not a duplicate to avoid taking points from the player if they've already guessed that letter.
+
+Each time a correct letter is guessed, the game re-builds the previously mentioned word `string` by replacing the underscore with the correctly guessed letter. 
+
+If a player uses up all of the 10 allowed wrong guesses, the game chooses a new word. If a player builds the entire word by replacing all of the underscores with the correct letters, the game chooses a new word.
+
+The game also has an option to display a hint to help players who are stuck on a word.
+
+### Technologies Used
+
 HTML
+
 CSS
+
 [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
+
 JavaScript
 
-## Credits
+  
+
+### Credits
+
 [NASA Images](https://www.nasa.gov/multimedia/imagegallery/index.html)
-Image of [tiktaalik](https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2018/walkingfishh.jpg)
-Image of a [tardigrade](https://media.mnn.com/assets/images/2018/03/3Dstock%20tardigrade%20shutter%20cc.jpg.653x0_q80_crop-smart.jpg)
-
-
-> Written with [StackEdit](https://stackedit.io/).
