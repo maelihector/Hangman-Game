@@ -20,15 +20,15 @@ Using the DOM method `querySelector()` to find HTML elements, and `innerHTML` to
 
 ### What does it do?
 
-Upon loading, the game chooses a new word at random to play, and builds a `string` of underscores that represent each letter of the word. The `string` is placed on the DOM for the user to see.
+Upon loading, the game chooses a word at random to play and builds a `string` of underscores that represent each letter of the word. The `string` is placed on the DOM for the user to see.
 
-When the `onkeyup` event handler captures an event the game  checks if the event refers to an alphabet letter key, and if alphabet key is a *new* guess and not a duplicate to avoid taking points from the player if they've already guessed that letter.
+When the `onkeyup` event handler captures an event the game  checks if the event refers to an alphabet letter key, and if it is an alphabet key, that it is a *new* guess and not a duplicate to avoid taking points from the player if they've already guessed that letter.
 
 Each time a correct letter is guessed, the game re-builds the previously mentioned word `string` by replacing the underscore with the correctly guessed letter. 
 
 If a player uses up all of the 10 allowed wrong guesses, the game chooses a new word. If a player builds the entire word by replacing all of the underscores with the correct letters, the game chooses a new word.
 
-The game also has an option to display a hint to help players who are stuck on a word.
+The game also has an `onclick` event to display a hint to help players who are stuck on a word.
 
 ### Technologies Used
 
