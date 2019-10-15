@@ -6,17 +6,17 @@ var cosmosGuessTheWordGame = {
     "carl sagan": {
       picture: "CarlSagan.jpg",
       hint: "He was the host of the orginal Cosmos documentary.",
-      imageAlt: "A male astronomer in mid speech with images of planets in the background."
+      imageAlt: "A man with images of planets in the background."
     },
     "neil degrasse tyson": {
       picture: "neil.jpg",
       hint: "He is the current host of the Cosmos documentary.",
-      imageAlt: "A male astronomer in black suit, inside a building with a James Webb Space Telescope poster hanging in the background."
+      imageAlt: "A man with a James Webb Space Telescope poster."
     },
     "jupiter": {
       picture: "jupiter.jpg",
-      hint: "This planet has the most mass of all the planets in our Solar System.",
-      imageAlt: "A planet with blue lights on its north pole, and a large red storm near the center."
+      hint: "The planet with the most mass in our Solar System.",
+      imageAlt: "A planet with a large red storm near the center."
     },
     "milky way galaxy": {
       picture: "milkyway.jpg",
@@ -36,7 +36,7 @@ var cosmosGuessTheWordGame = {
     "asteroid": {
       picture: "asteroid.jpg",
       hint: "What is left of comets after their ice is evaporated by the sun.",
-      imageAlt: "A massive gray rock-like object with craters, flying through space."
+      imageAlt: "A massive rock-like object flying through space."
     },
     "halleys comet": {
       picture: "halley.jpg",
@@ -50,8 +50,8 @@ var cosmosGuessTheWordGame = {
     },
     "event horizon": {
       picture: "eventHorizon.jpg",
-      hint: "The boundary that separates a black hole from the rest of the universe.",
-      imageAlt: "A celestial body with two bright, intense lights shining from opposite sides."
+      hint: "The boundary that separates a black hole from the universe.",
+      imageAlt: "A celestial body with lights shining from opposite sides."
     },
     "tardigrade": {
       picture: "tardigrade.jpg",
@@ -61,7 +61,7 @@ var cosmosGuessTheWordGame = {
     "tiktaalik": {
       picture: "tiktaalik.jpg",
       hint: "One of the first animals to venture onto land from the sea.",
-      imageAlt: "A drawn depiction of a long fish-like animal, half inside the water and half on land."
+      imageAlt: "A fish-like animal, half inside the water and half on land."
     }
   },
 
@@ -82,12 +82,13 @@ var cosmosGuessTheWordGame = {
     // Remove previous word's hint
     document.querySelector("#hint").innerHTML = "";
     // Reset for a new word
-    this.currentWord = null,
-      this.wordItems = [],
-      this.lettersGuessedArray = [],
-      this.currentHint = null,
-      // Pick a random word to play
-      this.currentWord = Object.keys(this.words)[Math.floor(Math.random() * Object.keys(this.words).length)];
+    this.currentWord = null;
+    this.wordItems = [];
+    this.lettersGuessedArray = [];
+    this.currentHint = null;
+    // Pick a random word to play
+    var gameWords = Object.keys(this.words);
+    this.currentWord = gameWords[Math.floor(Math.random() * gameWords.length)];
     // Check if word has already been played in current 5-game set, if so pick a new word, else add the word to wordsPlayed array
     if (this.wordsPlayed.indexOf(this.currentWord) > -1) this.newWord();
     else this.wordsPlayed.push(this.currentWord);
@@ -96,7 +97,7 @@ var cosmosGuessTheWordGame = {
     // Update word hint
     this.currentHint = this.words[this.currentWord].hint;
     // Update word image
-    document.querySelector("#image").innerHTML = "<img class='hint-image' src='./assets/images/" + this.words[this.currentWord].picture + "' alt='" + this.words[this.currentWord].imageAlt + "' />"
+    document.querySelector("#image").innerHTML = "<img class='hint-image' src='./assets/images/" + this.words[this.currentWord].picture + "' alt='" + this.words[this.currentWord].imageAlt + "' />";
     // Call method to build word blanks
     this.buildWordBlanks();
   },
@@ -132,11 +133,11 @@ var cosmosGuessTheWordGame = {
   // Method that checks if player has guessed the entire word
   checkTotalCorrectGuesses: function (uniqueLettersOfTheWord, totalGuessedLetters) {
     // Remove whitespace from the word in play
-    lettersOfTheWord = this.wordItems.filter(function (str) {
+    var lettersOfTheWord = this.wordItems.filter(function (str) {
       return /\S/.test(str);
     });
     // Remove repeating letters of the word
-    var uniqueLettersOfTheWord = lettersOfTheWord.filter(function (item, index) {
+    uniqueLettersOfTheWord = lettersOfTheWord.filter(function (item, index) {
       return lettersOfTheWord.indexOf(item) >= index;
     });
     // Grab letters already guessed
@@ -146,13 +147,15 @@ var cosmosGuessTheWordGame = {
     var correctGuesses = [];
 
     // Compare guessed letters and letters of the word
-    totalGuessedLetters.forEach((guessedLetter) => uniqueLettersOfTheWord.forEach((uniqueLetter) => {
-      // If a guessed letter is equal to a letter in the word AND has not been compared already (prevents ducplicates for words using the same letter more than once), push to correctGuesses array
-      if (guessedLetter === uniqueLetter && correctGuesses.indexOf(guessedLetter) === -1) {
-        correctGuesses.push(guessedLetter)
-        return correctGuesses;
-      }
-    }));
+    totalGuessedLetters.forEach(function (guessedLetter) {
+      uniqueLettersOfTheWord.forEach(function (uniqueLetter) {
+        // If a guessed letter is equal to a letter in the word AND has not been compared already (prevents ducplicates for words using the same letter more than once), push to correctGuesses array
+        if (guessedLetter === uniqueLetter && correctGuesses.indexOf(guessedLetter) === -1) {
+          correctGuesses.push(guessedLetter);
+          return correctGuesses;
+        }
+      });
+    });
 
     // Update the DOM with  wrong guesses amount
     var wrongGuesses = this.lettersGuessedArray.length - correctGuesses.length;
@@ -202,7 +205,7 @@ var cosmosGuessTheWordGame = {
       this.losses = 0;
       // Congratulate if player won 5 of 5
       setTimeout(function () {
-        $('#perfectScoreModal').modal('show');
+        $("#perfectScoreModal").modal("show");
       }, 1000);
       this.newWord();
     } else if (totalGames === 5) {
@@ -210,7 +213,7 @@ var cosmosGuessTheWordGame = {
       this.losses = 0;
       // Tell player they did not get 5 of 5
       setTimeout(function () {
-        $('#fiveWordsPlayedModal').modal('show');
+        $("#fiveWordsPlayedModal").modal("show");
       }, 1000);
       this.newWord();
     } else {
@@ -223,7 +226,7 @@ var cosmosGuessTheWordGame = {
     var alphabetOnly = key.match(/[a-z]/);
     // If player presses something other than an alphabet key, tell player to press only letters
     if (alphabetOnly === null || alphabetOnly.input.length > 1) {
-      $('#lettersOnlyModal').modal('show');
+      $("#lettersOnlyModal").modal("show");
     } else {
       // Else pass the guessed letter into the `checkForDuplicateLetters` method
       this.checkForDuplicateLetters(alphabetOnly.input);
@@ -232,15 +235,15 @@ var cosmosGuessTheWordGame = {
 
   // Method that checks if the played letter is not already in `lettersGuessedArray` to keep the player from losing a guess
   checkForDuplicateLetters: function (letter) {
-    // If letter is not in `lettersGuessedArray`, push the letter to `lettersGuessedArray` 
+    // If letter is not in `lettersGuessedArray`, push the letter to `lettersGuessedArray`
     if (this.lettersGuessedArray.indexOf(letter) === -1) {
       this.lettersGuessedArray.push(letter);
       // Build word
       this.buildWordBlanks();
     } else {
       // Else tell player that the letter has already been played
-      $('#duplicate-letter').text(letter);
-      $('#noDuplicatesModal').modal('show');
+      $("#duplicate-letter").text(letter);
+      $("#noDuplicatesModal").modal("show");
     }
   },
 
@@ -255,7 +258,7 @@ var cosmosGuessTheWordGame = {
     document.querySelector("#totalWordsPlayed").innerHTML = this.wins + this.losses;
   }
 
-}
+};
 
 // Start game at page load
 cosmosGuessTheWordGame.newWord();
