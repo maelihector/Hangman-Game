@@ -11,7 +11,7 @@
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
-  <title>Guess the Word!</title>
+  <title>Guess The Word</title>
 </head>
 
 <body>
@@ -19,10 +19,9 @@
   <div id="game">
 
     <div class="header">
-      <h1 class="display-2">Cosmos TV Show</h1>
-      <h2 class="display-4">Guessing Game</h2>
-      <h3 class="display-5">Press any letter to get started!</h3>
-      <h4 class="lead">Try to get a perfect 5 out of 5 before the game resets!</h4>
+      <h1 class="display-2">Cosmos TV Show Guessing Game</h1>
+      <h2 class="display-5">Press any letter key to get started!</h2>
+      <h3 class="lead">Try to get a perfect 5 out of 5 before the game resets!</h3>
     </div>
 
     <main class="row">
@@ -32,12 +31,15 @@
           <!-- Number of wins is kept track up via JavaScript and dumped under 'wins-counter' id. -->
           <span id="wins">0</span> wins out of <span id="totalWordsPlayed">0</span>
         </h5>
+        <br>
         <!-- The letters that are guessed by the user are kept track up via JavaScript and dumped under 'lettersGuessed' id. -->
         <h5 class="lead text-center">Letters guessed right:</h5>
         <span class="lead text-center letters-guessed" id="rightLettersGuessed"></span>
-
+        <br>
         <h5 class="lead text-center">Letters guessed wrong:</h5>
         <span class="lead text-center letters-guessed" id="wrongLettersGuessed"></span>
+        <br>
+
         <h5 class="lead text-center">
           You have used
           <!-- The number of guesses that the user has left are kept track up via JavaScript and dumped under 'guesses-left' id. -->
@@ -47,7 +49,7 @@
       </div>
 
       <div class="background col-md-9 col-sm-12">
-        <h4 class="lead">What or Who is in the image below?</h4>
+        <h4 class="lead display-4">What or Who is in the image below?</h4>
         <div id="image"></div>
         <!-- Using the id 'currentWord' we replace each blank with the corresponding letter of the word as the user guesses them. -->
         <p class="blanks background" id="currentWord"></p>
@@ -61,18 +63,21 @@
 
   </div>
 
-  <!-- Game Modals -->
-  <div id="lettersOnlyModal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+  <!-- ******* Game Modals ******* -->
+
+  <!-- Tells the player to press only letter keys. -->
+  <div class="modal fade" id="lettersOnlyModal" tabindex="-1" role="dialog" aria-labelledby="WrongKey"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Oops</h5>
+          <h5 class="modal-title">Wrong Type of Key</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>Press letter keys only!</p>
+          <p>Press alphabet letter keys only!</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
@@ -80,18 +85,19 @@
       </div>
     </div>
   </div>
-
-  <div id="noDuplicatesModal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+  <!-- Tells the player they have already played a certain letter. -->
+  <div class="modal fade" id="noDuplicatesModal" tabindex="-1" role="dialog" aria-labelledby="DuplicateKey"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Oops</h5>
+          <h5 class="modal-title">Duplicate Key</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>You already tried the letter <span id="duplicate-letter"></span>!</p>
+          <span>You already played the letter <span id="duplicate-letter"></span>!</span>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
@@ -99,9 +105,10 @@
       </div>
     </div>
   </div>
-
-  <div id="perfectScoreModal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+  <!-- Tells the player they got a perfect score at the end of the game. -->
+  <div class="modal fade" id="perfectScoreModal" tabindex="-1" role="dialog" aria-labelledby="PerfectScore"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Congratulations!</h5>
@@ -118,9 +125,10 @@
       </div>
     </div>
   </div>
-
-  <div id="fiveWordsPlayedModal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+  <!-- Tells the player they did not get a perfects score at the end of the game. -->
+  <div class="modal fade" id="fiveWordsPlayedModal" tabindex="-1" role="dialog" aria-labelledby="SorryModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Sorry</h5>
@@ -137,7 +145,6 @@
       </div>
     </div>
   </div>
-
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
