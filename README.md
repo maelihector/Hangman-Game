@@ -1,36 +1,40 @@
-# Guess The Word
+# Cosmos Hangman
 
-## A Cosmos Themed Word Guessing Game
+## What is Cosmos Hangman?
 
-### What is this?
+Cosmos Hangman is a [JavaScript](https://en.wikipedia.org/wiki/JavaScript), [Cosmos TV Show](https://en.wikipedia.org/wiki/Cosmos:_A_Spacetime_Odyssey) themed game application, that runs in the browser.
 
-Guess The Word is a Hangman-like computer game where a player tries to guess a word letter by letter until they complete the word. 
+The game application uses Object Oriented Programming (OOP), and has most of its code organized inside a [JavaScript](https://en.wikipedia.org/wiki/JavaScript) object.
 
-The game plays a total of 5 words for the player. The player is allowed 10 wrong letter guesses per word before the player looses their chance of completing that word. The game keeps track of completed words and loses and shows these to the player throughout the game. 
 
-The game is over when the player has played 5 words. 
+## How does Cosmos Hangman work?
 
-### How does it work?
+Cosmos Hangman uses [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) Web API [Document](https://developer.mozilla.org/en-US/docs/Web/API/Document)'s methods to manipulate the HTML displayed on the browser throughout the game.
 
-Guess The Word uses Object Oriented Programming, and has all of its code (except for events) organized inside an object with several methods that power the game. 
+- The `querySelector()`  method is used to find HTML elements, and the
+-  `innerHTML` is used to get and/or set the HTML within the specified element
 
-The game methods are called with Global Event Handlers;  `onkeyup` to capture the player's letter guess, and `onclick` to signal mouse events.
+Cosmos Hangman also uses some event handlers defined on the [GlobalEventHandlers](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers) mixin and implemented by [Document](https://developer.mozilla.org/en-US/docs/Web/API/Document).
 
-Using the DOM method `querySelector()` to find HTML elements, and `innerHTML` to get and/or set the HTML within the specified element, the game is able to keep the player updated with the game's progression. 
+- The   `onkeyup` event handler is used to capture the player's letter guess, and the
 
-### What does it do?
+- `onclick`  event handler is used to tell the application to display the game word's hint to the player
 
-Upon loading, the game chooses a word at random to play and builds a `string` of underscores that represent each letter of the word. The `string` is placed on the DOM for the user to see.
+## What does Cosmos Hangman do?
 
-When the `onkeyup` event handler captures an event the game  checks if the event refers to an alphabet letter key, and if it is an alphabet key, that it is a *new* guess and not a duplicate to avoid taking points from the player if they've already guessed that letter.
+Upon loading, the game chooses a new word at random to play, and builds a string of underscores that represent each letter of the word, and dumps the string on the DOM.
 
-Each time a correct letter is guessed, the game re-builds the previously mentioned word `string` by replacing the underscore with the correctly guessed letter. 
+When the `onkeyup` event handler triggers, the game  checks if the event refers to a *new* alphabet letter key, if the player pressed a letter than has already been played, or pressed a non-alphabet key, it returns false, else the new letter key gets evaluated to see if it belongs to part of the word in play.
 
-If a player uses up all of the 10 allowed wrong guesses, the game chooses a new word. If a player builds the entire word by replacing all of the underscores with the correct letters, the game chooses a new word.
+Each time a correct letter is guessed, the game re-builds the word string by replacing the underscores with the correctly guessed letter.
 
-The game also has an `onclick` event to display a hint to help players who are stuck on a word.
+If a player uses up all of the 10 allowed wrong guesses, or guesses the entire word, the scores are updated and a new word is chosen to be in play.
 
-### Technologies Used
+The game ends and resets after five words have been played.
+
+The game also has an option to display a hint to help players who are stuck on a word.
+
+## Technologies Used
 
 HTML
 
@@ -40,8 +44,12 @@ CSS
 
 JavaScript
 
-  
+## Credits
 
-### Credits
+### Images
 
 [NASA Images](https://www.nasa.gov/multimedia/imagegallery/index.html)
+
+[tiktaalik](https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2018/walkingfishh.jpg)
+
+[tardigrade](https://media.mnn.com/assets/images/2018/03/3Dstock%20tardigrade%20shutter%20cc.jpg.653x0_q80_crop-smart.jpg)
