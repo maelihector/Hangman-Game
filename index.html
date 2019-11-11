@@ -64,45 +64,6 @@
   </div>
 
   <!-- ******* Game Modals ******* -->
-
-  <!-- Tells the player to press only letter keys. -->
-  <div class="modal fade" id="lettersOnlyModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Wrong Type of Key</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Press alphabet letter keys only!</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Tells the player they have already played a certain letter. -->
-  <div class="modal fade" id="noDuplicatesModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Duplicate Key</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <span>You already played the letter <span id="duplicate-letter"></span>!</span>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
-        </div>
-      </div>
-    </div>
-  </div>
   <!-- Tells the player they got a perfect score at the end of the game. -->
   <div class="modal fade" id="perfectScoreModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -133,10 +94,10 @@
           </button>
         </div>
         <div class="modal-body">
-          <p>You didn't get 5 out of 5 right. Go watch Cosmos, we'll wait.</p>
+          <p>You only got <span id="wrong"></span> out of 5 right. Go watch Cosmos, we'll wait.</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Try again!</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" target="_top">Try again!</button>
         </div>
       </div>
     </div>
