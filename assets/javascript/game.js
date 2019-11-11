@@ -4,7 +4,7 @@ var cosmosGuessTheWordGame = {
   // Object of all words objects
   words: {
     "carl sagan": {
-      image: "CarlSagan.jpg",
+      image: "carlSagan.jpg",
       hint: "He was the host of the orginal Cosmos documentary.",
       imageAlt: "A man with images of planets in the background."
     },
