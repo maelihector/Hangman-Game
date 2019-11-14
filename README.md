@@ -22,7 +22,7 @@ Cosmos Hangman also uses some event handlers defined on the [GlobalEventHandlers
 
 ## What does Cosmos Hangman do?
 
-Upon loading, the game chooses a new word at random to play, and builds a string of underscores that represent each letter of the word, and dumps the string on the DOM.
+Upon loading, the game chooses a new word at random to play, builds a string of underscores that represent each letter of the word, and then dumps the string on the DOM.
 
 When the `onkeyup` event handler triggers, the game  checks if the event refers to a *new* alphabet letter key, if the player pressed a letter than has already been played, or pressed a non-alphabet key, it returns false, else the new letter key gets evaluated to see if it belongs to part of the word in play.
 
